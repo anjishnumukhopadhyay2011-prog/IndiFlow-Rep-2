@@ -1,0 +1,265 @@
+{
+  "id": "102019b9e89216079ca8acac5d195fe263c",
+  "version": "102019b9e89216077f280ea4e97f6c074cf",
+  "schema": {
+    "name": "training_submission",
+    "description": "Stores AI training data from user submissions regarding route statistics and accuracy.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique submission identifier.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier."
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing user entity.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal reference."
+        }
+      },
+      {
+        "name": "route_name",
+        "description": "Name of the route.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Route data."
+        }
+      },
+      {
+        "name": "predicted_time_minutes",
+        "description": "AI predicted travel time in minutes.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Training data."
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "actual_time_minutes",
+        "description": "Actual measured travel time in minutes.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Training data."
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "traffic_level",
+        "description": "Traffic condition level.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Training data."
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "low"
+          },
+          {
+            "number": 2,
+            "value": "moderate"
+          },
+          {
+            "number": 3,
+            "value": "high"
+          }
+        ]
+      },
+      {
+        "name": "transport_mode",
+        "description": "Mode of transportation.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Training data."
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "driving"
+          },
+          {
+            "number": 2,
+            "value": "cycling"
+          },
+          {
+            "number": 3,
+            "value": "walking"
+          },
+          {
+            "number": 4,
+            "value": "bus"
+          },
+          {
+            "number": 5,
+            "value": "bike"
+          }
+        ]
+      },
+      {
+        "name": "feedback_notes",
+        "description": "User feedback notes.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User content."
+        },
+        "nullable": true
+      },
+      {
+        "name": "accuracy_score",
+        "description": "Calculated accuracy percentage 0-100.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Calculated metric."
+        },
+        "minimum": 0,
+        "numeric": "float"
+      },
+      {
+        "name": "submitted_at",
+        "description": "Submission timestamp.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Audit timing."
+        },
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "submitted_at"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "traffic_level"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "transport_mode"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "accuracy_score"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "695fdfd6ea25a89f390b17e6",
+    "root": "6958e27e4f7767272926ad86",
+    "project": "6958e27e4f7767272926ad85",
+    "user": "d8e1f360-00b1-70f7-5022-64f382bf45c9"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

@@ -1,0 +1,219 @@
+{
+  "id": "102019b9e8921607a24a68e7e318c898264",
+  "version": "102019b9e89216077f280ea4e97f6c074cf",
+  "schema": {
+    "name": "user_feedback",
+    "description": "Stores user feedback about routes and traffic accuracy.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique feedback identifier.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier."
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "Foreign key referencing user entity.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal reference."
+        }
+      },
+      {
+        "name": "route_origin",
+        "description": "Origin location name.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Route detail."
+        }
+      },
+      {
+        "name": "route_destination",
+        "description": "Destination location name.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Route detail."
+        }
+      },
+      {
+        "name": "feedback_type",
+        "description": "Type of feedback category.",
+        "type": 100,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Classification."
+        },
+        "enumeration": [
+          {
+            "value": "Unspecified"
+          },
+          {
+            "number": 1,
+            "value": "route_quality"
+          },
+          {
+            "number": 2,
+            "value": "traffic_accuracy"
+          },
+          {
+            "number": 3,
+            "value": "shortcut_suggestion"
+          },
+          {
+            "number": 4,
+            "value": "other"
+          }
+        ]
+      },
+      {
+        "name": "rating",
+        "description": "User rating from 1 to 5.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User sentiment."
+        },
+        "minimum": 1,
+        "maximum": 5,
+        "numeric": "int"
+      },
+      {
+        "name": "comments",
+        "description": "Detailed feedback comments.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User content."
+        },
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "description": "Feedback creation timestamp.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Audit timing."
+        },
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "user_id"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "created_at"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "feedback_type"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "rating"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ],
+        "cascade": true
+      }
+    ]
+  },
+  "task": {
+    "id": "695fdfd6ea25a89f390b17e6",
+    "root": "6958e27e4f7767272926ad86",
+    "project": "6958e27e4f7767272926ad85",
+    "user": "d8e1f360-00b1-70f7-5022-64f382bf45c9"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

@@ -1,0 +1,194 @@
+{
+  "id": "102019b9e89216079609ff23e0eb3093cf4",
+  "version": "102019b9e89216077f280ea4e97f6c074cf",
+  "schema": {
+    "name": "user",
+    "description": "Stores user account information including OAuth authentication details and profile metadata.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique user identifier.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier."
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "google_id",
+        "description": "OAuth Google account identifier.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Third-party authentication identifier."
+        },
+        "nullable": true
+      },
+      {
+        "name": "apple_id",
+        "description": "OAuth Apple account identifier.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "Third-party authentication identifier."
+        },
+        "nullable": true
+      },
+      {
+        "name": "email",
+        "description": "User email address.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "PII."
+        },
+        "format": "email"
+      },
+      {
+        "name": "name",
+        "description": "User display name.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User profile data."
+        }
+      },
+      {
+        "name": "avatar",
+        "description": "User profile avatar URL.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "User profile data."
+        },
+        "nullable": true
+      },
+      {
+        "name": "created_at",
+        "description": "Account creation timestamp.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Auditing."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "last_login",
+        "description": "Last login timestamp.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Security auditing."
+        },
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "google_id"
+        ],
+        "unique": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "apple_id"
+        ],
+        "unique": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "email"
+        ],
+        "unique": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "created_at"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "last_login"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ]
+  },
+  "task": {
+    "id": "695fdfd6ea25a89f390b17e6",
+    "root": "6958e27e4f7767272926ad86",
+    "project": "6958e27e4f7767272926ad85",
+    "user": "d8e1f360-00b1-70f7-5022-64f382bf45c9"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}

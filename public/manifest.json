@@ -1,0 +1,27 @@
+{
+  "short_name": "IndiFlow",
+  "name": "IndiFlow - Smart Route Planning",
+  "description": "AI-powered traffic optimization and route planning for India",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "256x256"
+    },
+    {
+      "src": "creao_icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "categories": ["navigation", "travel", "utilities"],
+  "lang": "en",
+  "prefer_related_applications": false
+}

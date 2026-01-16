@@ -1,0 +1,195 @@
+{
+  "id": "102019b9e892160790aa6ed59c32b960c45",
+  "version": "102019b9e89216077f280ea4e97f6c074cf",
+  "schema": {
+    "name": "search_history",
+    "description": "Stores user search history with origin/destination locations and timestamps to analyze demand patterns.",
+    "fields": [
+      {
+        "name": "id",
+        "description": "Unique identifier for the search record.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "System identifier, public within context."
+        }
+      },
+      {
+        "name": "data_creator",
+        "description": "id of the user who creates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "data_updater",
+        "description": "id of the user who updates the record",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal auditing."
+        }
+      },
+      {
+        "name": "create_time",
+        "description": "create time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "update_time",
+        "description": "update time in timestamp unix",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 1,
+          "reason": "Record metadata."
+        },
+        "format": "timestamp"
+      },
+      {
+        "name": "user_id",
+        "description": "ID of the user associated with this search history.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 3,
+          "reason": "User behavior data is confidential."
+        }
+      },
+      {
+        "name": "origin_name",
+        "description": "Name or address of the starting location.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal analysis of user intent."
+        }
+      },
+      {
+        "name": "origin_lat",
+        "description": "Latitude of the origin location.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Geospatial data."
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "origin_lng",
+        "description": "Longitude of the origin location.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Geospatial data."
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "destination_name",
+        "description": "Name or address of the destination location.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Internal analysis of user intent."
+        }
+      },
+      {
+        "name": "destination_lat",
+        "description": "Latitude of the destination location.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Geospatial data."
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "destination_lng",
+        "description": "Longitude of the destination location.",
+        "type": 2,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Geospatial data."
+        },
+        "numeric": "float"
+      },
+      {
+        "name": "search_time",
+        "description": "Specific timestamp reflecting when the search query was executed.",
+        "type": 1,
+        "compliance": {
+          "confidentiality": 2,
+          "reason": "Behavioral timing analysis."
+        },
+        "format": "timestamp"
+      }
+    ],
+    "indexes": [
+      {
+        "fields": [
+          "id"
+        ],
+        "unique": true,
+        "primary": true,
+        "order": false
+      },
+      {
+        "fields": [
+          "search_time",
+          "user_id"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "search_time"
+        ],
+        "order": true
+      },
+      {
+        "fields": [
+          "data_creator"
+        ],
+        "order": false
+      },
+      {
+        "fields": [
+          "data_updater"
+        ],
+        "order": false
+      }
+    ],
+    "relations": [
+      {
+        "referencing_fields": [
+          "user_id"
+        ],
+        "referenced_entity": {
+          "name": "user"
+        },
+        "referenced_fields": [
+          "id"
+        ]
+      }
+    ]
+  },
+  "task": {
+    "id": "695fdfd6ea25a89f390b17e6",
+    "root": "6958e27e4f7767272926ad86",
+    "project": "6958e27e4f7767272926ad85",
+    "user": "d8e1f360-00b1-70f7-5022-64f382bf45c9"
+  },
+  "namespace": {
+    "id": "01987547fc6c72ecb453bd2736bd4ea0",
+    "tenant": 2,
+    "name": "global-1",
+    "default": true
+  },
+  "revision": 1
+}
